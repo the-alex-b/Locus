@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "local-vector-storage"
+version = "0.1.0"
+description = ""
+authors = ["Alex <46456279+the-alex-b@users.noreply.github.com>"]
+readme = "README.md"
+packages = [{include = "local_vector_storage"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+hnswlib = "^0.7.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
