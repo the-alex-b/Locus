@@ -1,2 +1,7 @@
-# local-vector-storage
-In-memory vector database
+# Locus - Local in-memory vector database
+Easy to use, local vector database with few dependencies. 
+
+
+## Examples
+
+
