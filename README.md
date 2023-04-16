@@ -1,6 +1,14 @@
-# Locus - Local in-memory vector database
-Easy to use, local vector database with few dependencies. 
+# Locus
+Locus is a local, simple, in-memory vector database.
 
+Why Locus?
+* Easy to use
+* 2 dependencies
+* Store database locally
+
+
+## Installation
+Soon
 
 ## Example Code
 Some example code to illustrate Locus' functionality.
