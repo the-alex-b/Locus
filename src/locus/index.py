@@ -7,6 +7,19 @@ import pickle
 
 @dataclass
 class Config:
+    """
+    A simple data class that contains the configuration options for the index.
+
+    Attributes
+    ----------
+        max_elements (int): The maximum number of elements in the index. Default is 100.
+        ef_construction (int): The construction time parameter for the HNSW index. Default is 200.
+        M (int): The number of bi-directional links to add per level in the HNSW index. Default is 16.
+        dim (int): The dimension of the embedding space. Default is 1536.
+        space (str): The distance metric to use for the HNSW index. Default is "cosine".
+        storage_location (str): The file location to use for storing the index on disk. Default is "index.db".
+    """
+
     max_elements: int = 100
     ef_construction: int = 200
     M: int = 16
@@ -16,12 +29,64 @@ class Config:
 
 
 class Vector:
+    """A class representing a vector with an embedding and associated data.
+
+    Parameters
+    ----------
+    embedding (np.array): A numpy array representing the embedding of the vector.
+    data (dict): A dictionary containing the data associated with the vector.
+
+    Attributes
+    ----------
+    embedding (np.array): A numpy array representing the embedding of the vector.
+    data (dict): A dictionary containing the data associated with the vector.
+    """
+
     def __init__(self, embedding, data):
         self.embedding: np.array = embedding
         self.data: dict = data
 
 
 class Index:
+    """
+    The Index class is used to create an HNSW index to store and retrieve vectors using their embeddings.
+
+    Parameters
+    ----------
+    dimensions : int
+        An integer representing the dimension of the embedding space.
+    config : Config, optional
+        A Config instance containing configuration options for the index.
+
+    Methods
+    -------
+    add_vector(vector: Vector, persist_on_disk: bool = True) -> None:
+        Adds a new vector to the index with the specified embedding and data. The persist_on_disk parameter can be used to
+        control whether the index is stored on disk after adding the vector.
+    retrieve(embedding: np.ndarray, number_of_results: int = 3) -> List[Dict]:
+        Retrieves the top number_of_results vectors that are closest to the given embedding. The method returns a list
+        of dictionaries containing the data associated with each vector.
+    from_file(file: str = "index.db") -> Index:
+        Creates a new index instance from the specified file location.
+
+    Attributes
+    ----------
+    config : Config
+        A Config instance containing configuration options for the index.
+    hnsw_index : hnswlib.Index
+        The HNSW index used to store the embeddings.
+    structured_memory : Dict[Vector]
+        The structured data associated with the embeddings stored in the index.
+
+    Examples
+    --------
+    >>> config = Config()
+    >>> index = Index(dimensions=10, config=config)
+    >>> vector = Vector(np.random.rand(10), {'data': 'example'})
+    >>> index.add_vector(vector)
+    >>> result = index.retrieve(np.random.rand(10))
+    """
+
     def __init__(self, dimensions, config=Config()):
         self.config = config
         # HNSW index
