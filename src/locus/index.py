@@ -3,48 +3,7 @@ import hnswlib
 from dataclasses import dataclass
 import numpy as np
 import pickle
-
-
-@dataclass
-class Config:
-    """
-    A simple data class that contains the configuration options for the index.
-
-    Attributes
-    ----------
-        max_elements (int): The maximum number of elements in the index. Default is 100.
-        ef_construction (int): The construction time parameter for the HNSW index. Default is 200.
-        M (int): The number of bi-directional links to add per level in the HNSW index. Default is 16.
-        dim (int): The dimension of the embedding space. Default is 1536.
-        space (str): The distance metric to use for the HNSW index. Default is "cosine".
-        storage_location (str): The file location to use for storing the index on disk. Default is "index.db".
-    """
-
-    max_elements: int = 100
-    ef_construction: int = 200
-    M: int = 16
-    dim: int = 1536
-    space: str = "cosine"
-    storage_location: str = "index.db"
-
-
-class Vector:
-    """A class representing a vector with an embedding and associated data.
-
-    Parameters
-    ----------
-    embedding (np.array): A numpy array representing the embedding of the vector.
-    data (dict): A dictionary containing the data associated with the vector.
-
-    Attributes
-    ----------
-    embedding (np.array): A numpy array representing the embedding of the vector.
-    data (dict): A dictionary containing the data associated with the vector.
-    """
-
-    def __init__(self, embedding, data):
-        self.embedding: np.array = embedding
-        self.data: dict = data
+from locus.config import Config
 
 
 class Index:
@@ -117,7 +76,7 @@ class Index:
     def retrieve(self, embedding: np.array, number_of_results=3) -> list[dict]:
         labels, distances = self.hnsw_index.knn_query(embedding, k=number_of_results)
 
-        return [self.structured_memory[id].message for id in labels[0]]
+        return [self.structured_memory[id] for id in labels[0]]
 
     def _store_on_disk(self) -> None:
         with open(
