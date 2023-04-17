@@ -76,7 +76,13 @@ class Index:
     def retrieve(self, embedding: np.array, number_of_results: int = 3) -> list[dict]:
         labels, distances = self.hnsw_index.knn_query(embedding, k=number_of_results)
 
-        return [self.structured_memory[id] for id in labels[0]]
+        print(labels)
+        print(distances)
+
+        return [
+            {"element": self.structured_memory[id], "distance": distances[0][i]}
+            for i, id in enumerate(labels[0])
+        ]
 
     def _store_on_disk(self) -> None:
         with open(
