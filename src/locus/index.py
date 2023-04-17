@@ -1,7 +1,10 @@
 from __future__ import annotations
+
+import pickle
+
 import hnswlib
 import numpy as np
-import pickle
+
 from locus.config import Config
 from locus.vector import Vector
 

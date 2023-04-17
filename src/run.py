@@ -12,7 +12,8 @@
 # index.add_vector(vector)
 
 import numpy as np
-from locus import Config, Vector, Index
+
+from locus import Config, Index, Vector
 
 # create a new configuration
 config = Config(
