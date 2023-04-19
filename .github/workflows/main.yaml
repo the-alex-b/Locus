@@ -58,3 +58,13 @@ jobs:
 
 
     # Create release on GitHub
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ steps.tagger.outputs.new_tag}}
+        generate_release_notes: true
+        target_commitish: ${{ github.sha }}
+        prerelease: false
+        files: |
+          dist/*.whl
+          dist/*.tar.gz 
