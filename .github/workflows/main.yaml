@@ -35,8 +35,6 @@ jobs:
 
     # TODO: Cache dependencies
 
-
-
     - name: Bump version and push tag
       id: tagger
       uses: anothrNick/github-tag-action@1.61.0 # Don't use @master unless you're happy to test the latest version
@@ -54,7 +52,13 @@ jobs:
         poetry build
 
     # Build package and publish to pypi
-
+    - name: Build and publish package
+      env:
+        PACKAGE_VERSION: ${{steps.tagger.outputs.new_tag}}
+      shell: bash
+      run: |
+        poetry config pypi-token.pypi ${{ secrets.PYPI_API_TOKEN }}
+        poetry publish --build
 
 
     # Create release on GitHub
