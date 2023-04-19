@@ -54,10 +54,10 @@ jobs:
     # Build package and publish to pypi
     - name: Build and publish package
       env:
-        PACKAGE_VERSION: ${{steps.tagger.outputs.new_tag}}
+        PYPI_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
       shell: bash
       run: |
-        poetry config pypi-token.pypi ${{ secrets.PYPI_API_TOKEN }}
+        poetry config pypi-token.pypi $PYPI_TOKEN
         poetry publish --build
 
 
