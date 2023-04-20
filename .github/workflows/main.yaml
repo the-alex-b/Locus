@@ -54,10 +54,9 @@ jobs:
     # Build package and publish to pypi
     - name: Build and publish package
       env:
-        PYPI_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
+        POETRY_PYPI_TOKEN_PYPI: ${{ secrets.PYPI_API_TOKEN }}
       shell: bash
       run: |
-        poetry config pypi-token.pypi $PYPI_TOKEN
         poetry publish --build -vvv
 
 
