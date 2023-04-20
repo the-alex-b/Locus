@@ -57,7 +57,7 @@ jobs:
         PYPI_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
       shell: bash
       run: |
-        poetry config pypi-token.pypi $PYPI_TOKENar
+        poetry config pypi-token.pypi $PYPI_TOKEN
         poetry publish --build -vvv
 
 
