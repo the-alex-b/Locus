@@ -1,14 +1,11 @@
 [tool.poetry]
-name = "locus-db"
+name = "locusdb"
 version = "0.1.0"
 license="Apache-2.0"
 description = "Local, in-memory vector database"
 authors = ["Alex <46456279+the-alex-b@users.noreply.github.com>"]
 readme = "README.md"
 repository="https://github.com/the-alex-b/Locus"
-packages = [
-    { include = "src/locus" }
-]
 
 [tool.poetry.dependencies]
 python = "^3.9"

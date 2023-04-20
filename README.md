@@ -15,7 +15,7 @@ Some example code to illustrate Locus' functionality.
 
 ``` python
 import numpy as np
-from locus import Config, Vector, Index
+from locusdb import Config, Vector, Index
 
 # create a new configuration
 config = Config(max_elements=1000, ef_construction=200, M=16, dim=128, space="cosine", storage_location="index.db")

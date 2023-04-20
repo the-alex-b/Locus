@@ -13,7 +13,7 @@
 
 import numpy as np
 
-from locus import Config, Index, Vector
+from locusdb import Config, Index, Vector
 
 # create a new configuration
 config = Config(

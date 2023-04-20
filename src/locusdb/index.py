@@ -5,8 +5,8 @@ import pickle
 import hnswlib
 import numpy as np
 
-from locus.config import Config
-from locus.vector import Vector
+from locusdb.config import Config
+from locusdb.vector import Vector
 
 
 class Index:
