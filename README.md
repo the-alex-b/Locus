@@ -8,8 +8,9 @@ Why Locus?
 
 
 ## Installation
-Soon
-
+``` bash
+pip install locusdb
+```
 ## Example Code
 Some example code to illustrate Locus' functionality.
 
