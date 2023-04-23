@@ -1,12 +1,10 @@
-import os
 import tempfile
+from typing import Dict, List
+
 import numpy as np
-import hnswlib
-import pickle
 import pytest
-from typing import List, Dict
-from pprint import pprint
-from locusdb.index import Index, Vector, Config
+
+from locusdb.index import Config, Index, Vector
 
 
 @pytest.fixture
