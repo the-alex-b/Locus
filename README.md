@@ -1,11 +1,5 @@
 # Locus
-Locus is a local, simple, in-memory vector database.
-
-Why Locus?
-* Easy to use
-* 2 dependencies
-* Store database locally
-
+Locus is a local, simple, in-memory vector database based on hnswlib.
 
 ## Installation
 ``` bash
