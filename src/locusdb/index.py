@@ -67,11 +67,13 @@ class Index:
             return pickle.load(handle)
 
     def add_vector(self, vector: Vector, persist_on_disk=True) -> None:
+        storage_id = len(self.structured_memory)
+
         # add to hnsw index
-        self.hnsw_index.add_items(vector.embedding, len(self.structured_memory))
+        self.hnsw_index.add_items(vector.embedding, storage_id)
 
         # add to stuctured data
-        self.structured_memory[len(self.structured_memory)] = vector.data
+        self.structured_memory[storage_id] = vector.data
 
         if persist_on_disk:
             self._store_on_disk()
