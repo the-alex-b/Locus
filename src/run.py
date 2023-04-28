@@ -39,7 +39,7 @@ def profile_performance():
     print(f"Items in index: {index.count}")
 
     # store the index on disk
-    index._store_on_disk()
+    index.persist_on_disk()
 
     # load the index from disk
     new_index = Index.from_file(config.storage_location)

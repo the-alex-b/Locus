@@ -76,7 +76,7 @@ class Index:
         self.structured_memory[storage_id] = vector.data
 
         if persist_on_disk:
-            self._store_on_disk()
+            self.persist_on_disk()
 
     def retrieve(self, embedding: np.array, number_of_results: int = 3) -> list[dict]:
         labels, distances = self.hnsw_index.knn_query(embedding, k=number_of_results)
@@ -86,7 +86,7 @@ class Index:
             for i, id in enumerate(labels[0])
         ]
 
-    def _store_on_disk(self) -> None:
+    def persist_on_disk(self) -> None:
         with open(
             self.config.storage_location,
             "wb",
