@@ -92,3 +92,7 @@ class Index:
             "wb",
         ) as handle:
             pickle.dump(self, handle, protocol=pickle.HIGHEST_PROTOCOL)
+
+    @property
+    def count(self) -> int:
+        return len(self.structured_memory)

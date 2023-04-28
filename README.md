@@ -33,7 +33,9 @@ for vector in vectors:
 # retrieve the closest vectors to a query embedding
 query_embedding = np.random.randn(config.dim)
 results = index.retrieve(query_embedding, number_of_results=3)
-print(results)
+
+print(f"Matches: {results}")
+print(f"Items in index: {index.count}")
 
 # store the index on disk
 index._store_on_disk()
