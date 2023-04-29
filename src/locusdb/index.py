@@ -66,15 +66,17 @@ class Index:
         with open(file, "rb") as handle:
             return pickle.load(handle)
 
-    def add_vector(self, vector: Vector, persist_on_disk=True) -> None:
+    def add_vector(self, vector: Vector, persist_on_disk=False) -> None:
+        storage_id = len(self.structured_memory)
+
         # add to hnsw index
-        self.hnsw_index.add_items(vector.embedding, len(self.structured_memory))
+        self.hnsw_index.add_items(vector.embedding, storage_id)
 
         # add to stuctured data
-        self.structured_memory[len(self.structured_memory)] = vector.data
+        self.structured_memory[storage_id] = vector.data
 
         if persist_on_disk:
-            self._store_on_disk()
+            self.persist_on_disk()
 
     def retrieve(self, embedding: np.array, number_of_results: int = 3) -> list[dict]:
         labels, distances = self.hnsw_index.knn_query(embedding, k=number_of_results)
@@ -84,9 +86,13 @@ class Index:
             for i, id in enumerate(labels[0])
         ]
 
-    def _store_on_disk(self) -> None:
+    def persist_on_disk(self) -> None:
         with open(
             self.config.storage_location,
             "wb",
         ) as handle:
             pickle.dump(self, handle, protocol=pickle.HIGHEST_PROTOCOL)
+
+    @property
+    def count(self) -> int:
+        return len(self.structured_memory)
