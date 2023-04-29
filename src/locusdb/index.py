@@ -66,7 +66,7 @@ class Index:
         with open(file, "rb") as handle:
             return pickle.load(handle)
 
-    def add_vector(self, vector: Vector, persist_on_disk=True) -> None:
+    def add_vector(self, vector: Vector, persist_on_disk=False) -> None:
         storage_id = len(self.structured_memory)
 
         # add to hnsw index
