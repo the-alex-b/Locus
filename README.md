@@ -1,5 +1,10 @@
 # Locus
-Locus is a local, simple, append-only, in-memory vector database based on hnswlib.
+Locus is a local, simple, append-only, in-memory vector database that wraps hnswlib.
+
+Locus is:
+* Simple.
+* Portable, dump to file take it with you (and run it in a lambda).
+* Scalable enough for a many use cases.
 
 ## Installation
 ``` bash
